@@ -8,10 +8,12 @@ export default function Home() {
     <>
 
     <RecoilRoot>
+   
 
     <FormularioItem/>
-    <Lista/>
     <TotalComprado/>
+    <Lista/>
+    
 
     </RecoilRoot>
     

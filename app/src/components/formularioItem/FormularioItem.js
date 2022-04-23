@@ -15,9 +15,9 @@ export default function FormularioItem() {
 
   const calcularaPreco = () =>{ 
     
-    const valorTotal = quantidade*valor 
-    
-    return valorTotal 
+    const valorTotal = Number(quantidade*valor
+    )
+    return valorTotal
   }
 
 

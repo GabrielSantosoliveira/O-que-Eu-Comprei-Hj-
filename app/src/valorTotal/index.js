@@ -1,36 +1,49 @@
-import { useRecoilValue } from "recoil"
-import { ListaDeProdutos } from "../atomos/atomo"
-import { useState } from "react"
+import { useRecoilValue } from "recoil";
+import { ListaDeProdutos } from "../atomos/atomo";
 
-export default function TotalComprado  (){
+export default function TotalComprado() {
+  let valor = Number(0.00);
 
-    let valor = 0 ; 
+  const listaValor = useRecoilValue(ListaDeProdutos);  
 
+  const valorTotal = listaValor.map((item) => {
+    valor = valor + item.valorTotal;
+  });
 
-    
-    const listaValor = useRecoilValue(ListaDeProdutos)
+  console.log(valor);
 
-    const valorTotal = listaValor.map(item =>{
-        
-            
-            valor  = valor + item.valorTotal
-      
-        
-    })
+  return (
+    <>
+      <div>
+        <span>Valor: R${valor.toFixed(2)}</span>
+      </div>
 
-    console.log(valor)
+      <style jsx>
+        {` 
+                
+                
+                span{
 
-    return (
-
-        <>
-        
-            <span>{valor}</span>
-
-
-            <style
-        
-        </>
+                    font-size: 1.6rem;
+                    font-weight: bolder;
+                    
+}
 
 
-    )
+                
+
+                div{
+                    margin-top: 1rem;
+                    margin-bottom: 1rem;
+                    width: 100vw;
+                    padding: 1rem;
+                    border-top: 1px solid black;
+                    border-bottom: 1px solid black;
+                    box-shadow: 5px 3px 9px rgba(0, 0, 0, 0.377);
+                }
+                
+                `}
+      </style>
+    </>
+  );
 }

@@ -32,7 +32,7 @@ export default function Item ({item}){
         <h2>nome: {item.produto}</h2>
 
         <span>quantidade: {item.quantidade} </span>
-        <span>valor: {item.valorTotal}</span>
+        <span>valor: {item.valorTotal.toFixed(2)}</span>
         <button value={item.id} onClick={remover}> remover </button>
         </div>
 
