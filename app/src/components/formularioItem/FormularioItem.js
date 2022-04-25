@@ -3,6 +3,7 @@ import { useState } from "react";
 import { v4 as uuidv4 } from "uuid";
 import useEnviarDados from "../../state/hooks/useEnviarDados";
 import calcularaPreco from "../../models/calcularPrecoDoItem";
+import Conteiner from "../styles/conteiner";
 
 export default function FormularioItem() {
   const [produto, setProduto] = useState("");
@@ -29,6 +30,9 @@ export default function FormularioItem() {
 
   return (
     <>
+
+    <Conteiner>
+
       <form onSubmit={enviarDados}>
         <div>
           <label htmlFor="Produto">Produto</label>
@@ -69,27 +73,38 @@ export default function FormularioItem() {
           <button type="submit"> adicionar </button>
         </div>
       </form>
+    </Conteiner>
+
+
 
       <style jsx>
         {`
           form {
-            width: 100vw;
+            width: 100%;
             box-sizing: border-box;
+            margin-bottom: 1rem;
+
           }
           div {
             display: flex;
             flex-direction: column;
+
+            width: 90%;
+            margin:auto;
           }
 
           label {
-            font-size: 1.8rem;
+            font-size: 1.5rem;
             color: ${temas.azul};
             font-weight: bold;
+            text-align: center
+
           }
           input {
             font-size: 1.5rem;
-            margin-bottom: 1.5rem;
             width: 90%;
+            margin:0 auto;
+            margin-bottom:1rem;
           }
 
           button {
@@ -97,7 +112,10 @@ export default function FormularioItem() {
             width: 90%;
             color: #efefef;
             background-color: ${temas.azul};
+            border: 1px solid black;
             transition: all 1s;
+            margin:0 auto;
+            margin-bottom:1rem;
           }
 
           button:hover {

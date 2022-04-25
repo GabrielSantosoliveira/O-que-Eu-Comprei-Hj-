@@ -1,19 +1,21 @@
 import { useRecoilValue } from "recoil"
 import { ListaDeProdutos } from "../../state/atom/atom"
+import Conteiner from "../styles/conteiner"
 import Item from "./item"
 
 export default function Lista (){
-    
+
     const listaValor = useRecoilValue(ListaDeProdutos)
-    
+
 
     return (
-        
+
 
         <>
-        
-        
-        
+
+        <Conteiner>
+
+
         <section>
 
 
@@ -27,7 +29,12 @@ export default function Lista (){
 
 
         </section>
-        
+
+
+        </Conteiner>
+
+
+
 
 
             <style jsx>
@@ -39,14 +46,14 @@ export default function Lista (){
                         max-height: 490px ;
                         overflow: auto;
                     }
-                
+
                 `}
             </style>
 
 
         </>
-        
-        
-        
+
+
+
         )
 }

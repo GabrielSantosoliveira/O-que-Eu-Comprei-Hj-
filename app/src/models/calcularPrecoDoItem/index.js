@@ -6,6 +6,6 @@ export default function calcularaPreco(quantidade, valor) {
     }
 
   const valorTotal = Number(quantidade * valor);
-  console.log(valorTotal)
+
   return valorTotal;
 }

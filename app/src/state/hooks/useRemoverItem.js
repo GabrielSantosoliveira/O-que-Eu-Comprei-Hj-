@@ -4,7 +4,8 @@ import {ListaDeProdutos} from '../../state/atom/atom'
 export default function useRemoverItem() {
   const setListaDeProdutos = useSetRecoilState(ListaDeProdutos);
 
-  return (id) => {
+  return id => {
+    
     setListaDeProdutos((produtosAntigos) =>
       produtosAntigos.filter((item) => item.id !== id)
     );
