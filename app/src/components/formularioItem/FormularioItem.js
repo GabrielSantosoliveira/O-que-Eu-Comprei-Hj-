@@ -1,152 +1,112 @@
-import { temas } from "../../../styles/temas.js";
-import {useState} from "react"
-import { useRecoilValue, useSetRecoilState } from "recoil";
-import { ListaDeProdutos } from "../../atomos/atomo.js";
-import {v4 as uuidv4} from 'uuid'
+import { temas } from "../../styles/temas";
+import { useState } from "react";
+import { v4 as uuidv4 } from "uuid";
+import useEnviarDados from "../../state/hooks/useEnviarDados";
+import calcularaPreco from "../../models/calcularPrecoDoItem";
+
 export default function FormularioItem() {
+  const [produto, setProduto] = useState("");
+  const [valor, setValor] = useState("");
+  const [quantidade, setQuantidade] = useState("");
 
-  const[produto,setProduto] = useState("")
-  const[valor,setValor] = useState("")
-  const[quantidade,setQuantidade] = useState("")
+  const setenviarDados = useEnviarDados();
 
-  const setListaDeProdutos = useSetRecoilState(ListaDeProdutos)
-  
-  
-
-  const calcularaPreco = () =>{ 
-    
-    const valorTotal = Number(quantidade*valor
-    )
-    return valorTotal
-  }
-
-
-  const enviarDados  = e => {
+  const enviarDados = (e) => {
     e.preventDefault();
 
-    
+    const valorTotal = calcularaPreco(quantidade, valor);
 
-    const valorTotal = calcularaPreco()
+    const id = uuidv4();
 
-    const id = uuidv4()
-   
+    const produtos = { produto, valor, quantidade, valorTotal, id };
 
-    const produtos = {produto,valor,quantidade,valorTotal,id};
-    
-    setListaDeProdutos(produtosAntigos => [...produtosAntigos , produtos])
+    setenviarDados(produtos);
 
-    setProduto('')
-    setQuantidade('')
-    setValor('')
+    setProduto("");
+    setQuantidade("");
+    setValor("");
+  };
 
-
-  }
-
-  
   return (
     <>
       <form onSubmit={enviarDados}>
-
-
-
         <div>
+          <label htmlFor="Produto">Produto</label>
 
+          <input
+            type="text"
+            placeholder="Produto"
+            name="Produto"
+            id="Produto"
+            onChange={(e) => setProduto(event.target.value)}
+            value={produto}
+            required
+          />
 
+          <label htmlFor="valor">valor</label>
 
-          
-        <label  htmlFor="Produto">Produto</label>
+          <input
+            type="number"
+            placeholder="Valor Do Produto"
+            name="valor"
+            id="valor"
+            onChange={(e) => setValor(e.target.value)}
+            value={valor}
+            required
+          />
 
-        <input
-          type="text"
-          placeholder="Produto"
-          name="Produto"
-          id="Produto"
-          onChange={ e => setProduto(event.target.value)}
-          value={produto}
-          required
-        />
+          <label htmlFor="quantidade">quantidade</label>
+          <input
+            type="number"
+            placeholder="quantidade do Produto"
+            name="quantidade"
+            id="quantidade"
+            onChange={(e) => setQuantidade(e.target.value)}
+            value={quantidade}
+            required
+          />
 
-        <label  htmlFor="valor">valor</label>
-
-        <input
-          type="number"
-          placeholder="Valor Do Produto"
-          name="valor"
-          id="valor"
-          onChange={ e=>setValor(e.target.value)}
-          value={valor}
-          required
-        />
-
-        <label  htmlFor="quantidade">quantidade</label>
-        <input
-          type="number"
-          placeholder="quantidade do Produto"
-          name="quantidade"
-          id="quantidade"
-          onChange={ e=>setQuantidade(e.target.value)}
-          value={quantidade}
-          required
-        />
-
-
-        <button  
-        
-        type="submit"
-        > adicionar </button>
-
-
+          <button type="submit"> adicionar </button>
         </div>
-
       </form>
 
-
-    <style jsx>
-
+      <style jsx>
         {`
-        
-            form{
-                width:100vw;
-                box-sizing: border-box
+          form {
+            width: 100vw;
+            box-sizing: border-box;
+          }
+          div {
+            display: flex;
+            flex-direction: column;
+          }
 
-            }
-            div{
-                display: flex;
-                flex-direction: column;
+          label {
+            font-size: 1.8rem;
+            color: ${temas.azul};
+            font-weight: bold;
+          }
+          input {
+            font-size: 1.5rem;
+            margin-bottom: 1.5rem;
+            width: 90%;
+          }
 
-            }
+          button {
+            font-size: 1.5rem;
+            width: 90%;
+            color: #efefef;
+            background-color: ${temas.azul};
+            transition: all 1s;
+          }
 
-            label{
-                font-size: 1.8rem;
-                color:${temas.azul};
-                font-weight: bold ;
-            }
-            input{
-              font-size: 1.5rem;
-              margin-bottom:1.5rem ;
-              width: 90%;
-            }
-
-            button{
-              font-size: 1.5rem;
-              width: 90%;
-              color:#efefef;
-              background-color:${temas.azul};
-              transition:all 1s ;
-             
-            }
-
-            button:hover{
-              cursor:pointer;
-              background-color:${temas.azulEscuro};
-              color:#ffffff;
-            }
-        
-        
+          button:hover {
+            cursor: pointer;
+            background-color: ${temas.azulEscuro};
+            color: #ffffff;
+          }
         `}
-
-    </style>
-
+      </style>
     </>
   );
 }

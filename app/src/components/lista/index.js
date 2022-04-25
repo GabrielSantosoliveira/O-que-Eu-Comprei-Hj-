@@ -1,5 +1,5 @@
 import { useRecoilValue } from "recoil"
-import { ListaDeProdutos } from "../../atomos/atomo"
+import { ListaDeProdutos } from "../../state/atom/atom"
 import Item from "./item"
 
 export default function Lista (){
