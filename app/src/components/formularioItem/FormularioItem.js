@@ -3,6 +3,7 @@ import { useState } from "react";
 import { v4 as uuidv4 } from "uuid";
 import useEnviarDados from "../../state/hooks/useEnviarDados";
 import calcularaPreco from "../../models/calcularPrecoDoItem";
+import guardarOValorTratadoDaQuantidade from "../../models/tratarAQuantidade";
 
 export default function FormularioItem() {
   const [produto, setProduto] = useState("");
@@ -26,6 +27,9 @@ export default function FormularioItem() {
     setQuantidade("");
     setValor("");
   };
+
+
+ 
 
   return (
     <>
@@ -61,7 +65,7 @@ export default function FormularioItem() {
             placeholder="quantidade do Produto"
             name="quantidade"
             id="quantidade"
-            onChange={(e) => setQuantidade(e.target.value)}
+            onChange={(e) => guardarOValorTratadoDaQuantidade(e.target.value,setQuantidade )}
             value={quantidade}
             required
           />
